@@ -3,6 +3,7 @@ import './App.css'
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
 import Characters from "./Components/Characters"
+import About from "./Components/About"
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path="/" element={<Characters/>}></Route>
+          <Route path="sobre" element={<About/>}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>
