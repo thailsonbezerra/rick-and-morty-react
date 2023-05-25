@@ -1,9 +1,11 @@
 import foto from '../img/sobre.png';
 import styles from './About.module.css';
+import Head from './Head';
 
 const About = () => {
     return (
         <section className={`${styles.about} animeLeft`}>
+            <Head title="RMR - Sobre" description="Sobre o projeto"/>
             <img src={foto} alt="foto" />
             <div className={styles.information}>
                 <h1>Sobre</h1>
