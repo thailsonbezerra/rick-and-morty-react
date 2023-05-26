@@ -1,0 +1,11 @@
+.characters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.characters .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+}
