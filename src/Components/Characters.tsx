@@ -51,7 +51,6 @@ const Characters = () => {
     },[currentPage])
 
     const loadMoreCharacters = () => {
-        getAllCharacters();
         if(info?.next){
             setCurrentPage(prevPage => prevPage + 1);
         }
