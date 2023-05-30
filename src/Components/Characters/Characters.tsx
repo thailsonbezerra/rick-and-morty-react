@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Head from "./Head";
+import Head from "../Head";
 import styles from "./Characters.module.css";
 import { Link } from "react-router-dom";
 

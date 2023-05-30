@@ -1,6 +1,6 @@
-import foto from '../img/sobre.png';
+import foto from '../../img/sobre.png';
 import styles from './About.module.css';
-import Head from './Head';
+import Head from '../Head';
 
 const About = () => {
     return (

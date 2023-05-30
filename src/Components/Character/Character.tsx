@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Head from "./Head";
+import Head from "../Head";
 
   interface LocationAndOrigin {
     name: string,
@@ -33,6 +33,7 @@ const Character = () => {
             const response = await fetch(url)
             const data = await response.json();
             setCharacter(data)
+            setLoading(false)
         } catch (error) {
            setError(`Um erro ocorreu: ${error}`)
         }
@@ -41,10 +42,9 @@ const Character = () => {
     useEffect(()=>{
         setLoading(true)
         fetchCharacter(`https://rickandmortyapi.com/api/character/${id}`);
-        setLoading(false)
     },[id])
 
-    if(loading) return <div>Carregando...</div>
+    if(loading) return <div className="loading"></div>
     if(error) return <p>{error}</p>
     if(character === null) return null;
     return (

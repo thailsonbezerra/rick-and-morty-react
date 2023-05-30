@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import './App.css'
-import Header from "./Components/Header"
-import Footer from "./Components/Footer"
-import Characters from "./Components/Characters"
-import About from "./Components/About"
-import Character from "./Components/Character"
+import Header from "./Components/Header/Header"
+import Footer from "./Components/Footer/Footer"
+import Characters from "./Components/Characters/Characters"
+import About from "./Components/About/About"
+import Character from "./Components/Character/Character"
 
 function App() {
 

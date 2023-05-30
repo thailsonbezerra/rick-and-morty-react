@@ -1,3 +1,9 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
 body {
     margin: 2rem;
 }
@@ -26,5 +32,20 @@ h1 {
     to {
         transform: initial;
         opacity: initial;
+    }
+}
+
+.loading {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 10px solid #ccc;
+    border-right-color: transparent;
+    animation: loading 1s infinite;
+}
+
+@keyframes loading {
+    to{
+        transform: rotate(360deg);
     }
 }
