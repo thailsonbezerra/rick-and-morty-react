@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Head from "./Head";
 import styles from "./Characters.module.css";
+import { Link } from "react-router-dom";
 
 interface Info {
     count: number,
@@ -61,10 +62,10 @@ const Characters = () => {
             <Head title="RMR - Personagens" description="Listagem dos personagens da série Rick and Morty"/>
            <div className={styles.cards}>
             {characters.map(character =>(
-                <div key={character.id}>
+                <Link to={`character/${character.id}`} key={character.id}>
                     <img src={character.image} alt={character.name}/>
                     <h1>{character.name}</h1>
-                </div>   
+                </Link>   
             ))}
             </div>
             <button onClick={loadMoreCharacters}>Carregar mais</button>

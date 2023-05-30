@@ -4,6 +4,7 @@ import Header from "./Components/Header"
 import Footer from "./Components/Footer"
 import Characters from "./Components/Characters"
 import About from "./Components/About"
+import Character from "./Components/Character"
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Characters/>}></Route>
           <Route path="sobre" element={<About/>}></Route>
+          <Route path="character/:id" element={<Character/>}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>
