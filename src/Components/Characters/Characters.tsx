@@ -34,7 +34,7 @@ interface Characters {
 const Characters = () => {
     const [characters, setCharacters] = React.useState<Characters[]>([]);
     const [info, setInfo] = React.useState<Info | null>(null);
-    const [currentPage, setCurrentPage] = React.useState<number>(1);
+    const [currentPage, setCurrentPage] = React.useState<number>(41);
 
     const getAllCharacters = async () =>{
         try {            
@@ -60,15 +60,23 @@ const Characters = () => {
     return (
         <section className={`${styles.characters} animeLeft`}>
             <Head title="RMR - Personagens" description="Listagem dos personagens da série Rick and Morty"/>
-           <div className={styles.cards}>
-            {characters.map(character =>(
-                <Link to={`character/${character.id}`} key={character.id}>
-                    <img src={character.image} alt={character.name}/>
-                    <h1>{character.name}</h1>
-                </Link>   
-            ))}
+            <div className={styles.cards}>
+                {characters.map(character =>(
+                    <Link key={character.id} to={`/character/${character.id}`} className={`${styles.card}`}>
+                        <img src={character.image}/>
+                        <div className={`${styles.card_content}`}>
+                            <div className={styles.card_info}>
+                                <span className={`${styles.card_title}`}>{character.name}</span>
+                                <div className={`${styles.card_subtitle}`}>
+                                    <p>{character.species}, {character.gender}</p>            
+                                    <p>Origem: {character.origin.name}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+                ))}
             </div>
-            <button onClick={loadMoreCharacters}>Carregar mais</button>
+        <button onClick={loadMoreCharacters}>Carregar mais</button>
         </section>
     );
        

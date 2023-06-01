@@ -7,7 +7,7 @@ const Header = () => {
     return (
         <header className={styles.header_bg}>
             <div className={styles.header}>
-                    <a><img src={foto} alt="icone rick" /></a>
+                    <a href="/"><img src={foto} alt="icone rick" /></a>
                     <nav>
                         <ul>
                             <li><NavLink className={styles.link} to="/" end>Personagens</NavLink></li>
