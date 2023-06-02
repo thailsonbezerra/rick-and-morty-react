@@ -1,12 +1,15 @@
 .characters {
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .characters .cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 40px;
+    padding: 40px 0px;
 }
 
 .card {
@@ -28,6 +31,7 @@
     left: 0;
     bottom: 0;
     width: 100%;
+    height: 84px;
     padding: 12px;
     background: #f2f2f2;
     border-top-left-radius: 20px;
@@ -81,9 +85,30 @@
     flex-direction: column;
     gap: 12px;
   }
-  
+
 @keyframes rainbow {
   to{
     filter:hue-rotate(310deg) drop-shadow(-1px -1px 10px #979696);
   }
+}
+
+.button_anim_bg_gradient {
+  padding: 0.6em 1.2em;
+  border-radius: 0.375em;
+  cursor: pointer;
+  color: #000;
+  background: linear-gradient(120deg, #5eccff , #81D4FA, #d0effd );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: background-position .6s;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  display: inline;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.button_anim_bg_gradient:hover {
+  background-position: 0 0;
 }

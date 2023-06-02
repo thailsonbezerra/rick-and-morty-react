@@ -48,7 +48,7 @@ const Character = () => {
     if(error) return <p>{error}</p>
     if(character === null) return null;
     return (
-        <section className={`animeLeft content`}>
+        <section className={`animeLeft`}>
             <Head title={`RMR - ${character.name}`} description={`Personagem ${character.name} da série Rick and Morty.`}/>
             <div>
                 <img src={character.image} alt={character.name}/>

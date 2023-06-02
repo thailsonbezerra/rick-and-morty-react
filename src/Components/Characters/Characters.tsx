@@ -58,25 +58,29 @@ const Characters = () => {
     };
 
     return (
-        <section className={`${styles.characters} animeLeft content`}>
-            <Head title="RMR - Personagens" description="Listagem dos personagens da série Rick and Morty"/>
-            <div className={styles.cards}>
-                {characters.map(character =>(
-                    <Link key={character.id} to={`/character/${character.id}`} className={`${styles.card}`}>
-                        <img src={character.image}/>
-                        <div className={`${styles.card_content}`}>
-                            <div className={styles.card_info}>
-                                <span className={`${styles.card_title}`}>{character.name}</span>
-                                <div className={`${styles.card_subtitle}`}>
-                                    <p>{character.species}, {character.gender}</p>            
-                                    <p>Origem: {character.origin.name}</p>
+        <section className={`animeLeft`}>
+            <div className={`${styles.characters}`}>
+                <Head title="RMR - Personagens" description="Listagem dos personagens da série Rick and Morty"/>
+                <div className={styles.cards}>
+                    {characters.map(character =>(
+                        <Link key={character.id} to={`/character/${character.id}`} className={`${styles.card}`}>
+                            <img src={character.image}/>
+                            <div className={`${styles.card_content}`}>
+                                <div className={styles.card_info}>
+                                    <span className={`${styles.card_title}`}>{character.name}</span>
+                                    <div className={`${styles.card_subtitle}`}>
+                                        <div>
+                                            <p>{character.species}, {character.gender}</p>            
+                                            <p>Origem: {character.origin.name}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </Link>
-                ))}
-            </div>
-        <button onClick={loadMoreCharacters}>Carregar mais</button>
+                        </Link>
+                    ))}
+                </div>
+            <button className={styles.button_anim_bg_gradient} onClick={loadMoreCharacters}>Carregar mais</button>
+        </div>
         </section>
     );
        

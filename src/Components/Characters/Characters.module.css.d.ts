@@ -10,6 +10,6 @@ declare const styles: {
     readonly card_subtitle: string,
     readonly card_info: string
     readonly temporary_text: string,
-
+    readonly button_anim_bg_gradient: string,
 };
 export default styles;
