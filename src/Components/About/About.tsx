@@ -4,7 +4,7 @@ import Head from '../Head';
 
 const About = () => {
     return (
-        <section className={`${styles.about} animeLeft`}>
+        <section className={`${styles.about} animeLeft content`}>
             <Head title="RMR - Sobre" description="Sobre o projeto"/>
             <img src={foto} alt="foto" />
             <div className={styles.information}>

@@ -34,7 +34,7 @@ interface Characters {
 const Characters = () => {
     const [characters, setCharacters] = React.useState<Characters[]>([]);
     const [info, setInfo] = React.useState<Info | null>(null);
-    const [currentPage, setCurrentPage] = React.useState<number>(41);
+    const [currentPage, setCurrentPage] = React.useState<number>(1);
 
     const getAllCharacters = async () =>{
         try {            
@@ -58,7 +58,7 @@ const Characters = () => {
     };
 
     return (
-        <section className={`${styles.characters} animeLeft`}>
+        <section className={`${styles.characters} animeLeft content`}>
             <Head title="RMR - Personagens" description="Listagem dos personagens da série Rick and Morty"/>
             <div className={styles.cards}>
                 {characters.map(character =>(

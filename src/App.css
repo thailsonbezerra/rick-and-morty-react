@@ -3,6 +3,19 @@
     margin: 0;
     box-sizing: border-box;
   }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh + 10rem);
+}
+
+.content{
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
   
   body {
     font-family: "Montserrat", sans-serif;

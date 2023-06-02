@@ -1,0 +1,19 @@
+.footer{
+    height: 10rem;
+    border-top: 1px solid rgb(245, 239, 239);
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer h1 span {
+    color: #81D4FA;
+    font-weight: bold;
+}
+
+.icons_social{
+    display: flex;
+    gap: 12px;
+
+}
