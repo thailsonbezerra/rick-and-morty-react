@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Head from "../Head";
 import styles from "./Characters.module.css";
 import { Link } from "react-router-dom";
+import { GET_ALL_CHARACTERS } from "../../api";
 
 interface Info {
     count: number,
@@ -38,7 +39,8 @@ const Characters = () => {
 
     const getAllCharacters = async () =>{
         try {            
-            const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${currentPage}`)
+            const {url, options} = await GET_ALL_CHARACTERS(currentPage)
+            const response = await fetch(url,options)
             const data = await response.json();
             setCharacters(prevCharacters => [...prevCharacters,...data.results])
             setInfo(data.info)   
