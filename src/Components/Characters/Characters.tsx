@@ -3,6 +3,7 @@ import Head from "../Head";
 import styles from "./Characters.module.css";
 import { Link } from "react-router-dom";
 import { GET_ALL_CHARACTERS } from "../../api";
+import useFetch from "../../Hooks/useFetch";
 
 interface Info {
     count: number,
@@ -37,13 +38,16 @@ const Characters = () => {
     const [info, setInfo] = React.useState<Info | null>(null);
     const [currentPage, setCurrentPage] = React.useState<number>(1);
 
+    const {loading,error,request} = useFetch()
+
     const getAllCharacters = async () =>{
         try {            
             const {url, options} = await GET_ALL_CHARACTERS(currentPage)
-            const response = await fetch(url,options)
-            const data = await response.json();
-            setCharacters(prevCharacters => [...prevCharacters,...data.results])
-            setInfo(data.info)   
+            const {response, json} = await request(url,options)
+            if(response){
+                setCharacters(prevCharacters => [...prevCharacters,...json.results])
+                setInfo(json.info)  
+            }
         } catch (error) {
             console.log(error)
         }
@@ -81,7 +85,7 @@ const Characters = () => {
                         </Link>
                     ))}
                 </div>
-            <button className={styles.button_anim_bg_gradient} onClick={loadMoreCharacters}>Carregar mais</button>
+            {loading ? <button disabled >Carregando...</button> : <button className={styles.button_anim_bg_gradient} onClick={loadMoreCharacters}>Carregar mais</button>}          
         </div>
         </section>
     );
