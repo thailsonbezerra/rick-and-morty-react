@@ -4,6 +4,7 @@ import styles from "./Characters.module.css";
 import { Link } from "react-router-dom";
 import { GET_ALL_CHARACTERS } from "../../api";
 import useFetch from "../../Hooks/useFetch";
+import Button from "../Forms/Button/Button";
 
 interface Info {
     count: number,
@@ -85,7 +86,7 @@ const Characters = () => {
                         </Link>
                     ))}
                 </div>
-            {loading ? <button disabled >Carregando...</button> : <button className={styles.button_anim_bg_gradient} onClick={loadMoreCharacters}>Carregar mais</button>}          
+            {loading ? <Button disabled>Carregando...</Button> : <Button onClick={loadMoreCharacters}>Carregar mais</Button>}          
         </div>
         </section>
     );

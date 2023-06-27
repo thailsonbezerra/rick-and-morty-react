@@ -91,24 +91,3 @@
     filter:hue-rotate(310deg) drop-shadow(-1px -1px 10px #979696);
   }
 }
-
-.button_anim_bg_gradient {
-  padding: 0.6em 1.2em;
-  border-radius: 0.375em;
-  cursor: pointer;
-  color: #000;
-  background: linear-gradient(120deg, #5eccff , #81D4FA, #d0effd );
-  background-size: 200% 100%;
-  background-position: 100% 0;
-  transition: background-position .6s;
-  border-radius: 6px;
-  cursor: pointer;
-  border: none;
-  display: inline;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.button_anim_bg_gradient:hover {
-  background-position: 0 0;
-}
