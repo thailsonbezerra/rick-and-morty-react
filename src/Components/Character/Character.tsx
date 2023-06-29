@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Head from "../Head";
 import { GET_CHARACTER } from "../../api";
+import Image from "../../Helper/Image";
 
   interface LocationAndOrigin {
     name: string,
@@ -59,7 +60,7 @@ const Character = () => {
         <section className={`animeLeft`}>
             <Head title={`RMR - ${character.name}`} description={`Personagem ${character.name} da série Rick and Morty.`}/>
             <div>
-                <img src={character.image} alt={character.name}/>
+                <Image src={character.image} alt={character.name}/>
                 <h1>{character.name}</h1>
                 <p>{character.species}, {character.origin.name}</p>
             </div>

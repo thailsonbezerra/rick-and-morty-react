@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { GET_ALL_CHARACTERS } from "../../api";
 import useFetch from "../../Hooks/useFetch";
 import Button from "../Forms/Button/Button";
+import Image from "../../Helper/Image";
 
 interface Info {
     count: number,
@@ -71,6 +72,7 @@ const Characters = () => {
                 <div className={styles.cards}>
                     {characters.map(character =>(
                         <Link key={character.id} to={`/character/${character.id}`} className={`${styles.card}`}>
+                            <Image src={character.image} alt={character.name}/>
                             <img src={character.image}/>
                             <div className={`${styles.card_content}`}>
                                 <div className={styles.card_info}>
