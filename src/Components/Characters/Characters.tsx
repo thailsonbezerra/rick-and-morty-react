@@ -39,7 +39,7 @@ const Characters = () => {
     const [characters, setCharacters] = React.useState<Characters[]>([]);
     const [info, setInfo] = React.useState<Info | null>(null);
     const [currentPage, setCurrentPage] = React.useState<number>(1);
-
+    const [lastPage, setLastPage] = React.useState<number>(0)
     const {loading,error,request} = useFetch()
 
     const getAllCharacters = async () =>{
@@ -56,14 +56,43 @@ const Characters = () => {
     } 
 
     useEffect(()=>{
-        getAllCharacters();
-    },[currentPage])
-
-    const loadMoreCharacters = () => {
-        if(info?.next){
+        if(lastPage === 0) {
+            getAllCharacters()
+            setLastPage(currentPage)
             setCurrentPage(prevPage => prevPage + 1);
         }
-    };
+
+        let wait = false
+        let previousScrollPosition = window.scrollY || document.documentElement.scrollTop;
+        function infiniteScroll() {
+            const currentScrollPosition = window.scrollY || document.documentElement.scrollTop;
+        
+            
+            const sectionHeight = document.querySelectorAll("section")[0].offsetHeight
+            const pageHeight = window.scrollY
+            const heightHasFetch = sectionHeight - pageHeight < 1000
+
+            if(heightHasFetch && !wait && currentScrollPosition > previousScrollPosition && lastPage !== currentPage && info?.next && !loading)  {
+                setLastPage(currentPage)
+                getAllCharacters()
+                setCurrentPage(prevPage => prevPage + 1);
+                wait = true;
+            }
+        }
+
+        window.addEventListener('scroll', infiniteScroll)
+        window.addEventListener('wheel', infiniteScroll)
+        
+        return () =>{
+            window.removeEventListener('wheel', infiniteScroll)
+            window.removeEventListener('scroll', infiniteScroll)
+        }
+
+
+       
+    },[lastPage, currentPage, info])
+
+
 
     return (
         <section className={`animeLeft`}>
@@ -88,7 +117,6 @@ const Characters = () => {
                         </Link>
                     ))}
                 </div>
-            {loading ? <Button disabled>Carregando...</Button> : <Button onClick={loadMoreCharacters}>Carregar mais</Button>}          
         </div>
         </section>
     );
