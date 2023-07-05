@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import Head from "../Head";
 import styles from "./Characters.module.css";
 import { Link } from "react-router-dom";
@@ -6,6 +6,8 @@ import { GET_ALL_CHARACTERS } from "../../api";
 import useFetch from "../../Hooks/useFetch";
 import Button from "../Forms/Button/Button";
 import Image from "../../Helper/Image";
+import Input from "../Forms/Input/Input";
+import useForm from "../../Hooks/useForm";
 
 interface Info {
     count: number,
@@ -41,10 +43,18 @@ const Characters = () => {
     const [currentPage, setCurrentPage] = React.useState<number>(1);
     const [lastPage, setLastPage] = React.useState<number>(0)
     const {loading,error,request} = useFetch()
+    const pesquisar = useForm()
+    
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        setCharacters([])
+        setCurrentPage(1)
+        setLastPage(0)
+    }
 
     const getAllCharacters = async () =>{
         try {            
-            const {url, options} = await GET_ALL_CHARACTERS(currentPage)
+            const {url, options} = await GET_ALL_CHARACTERS(currentPage, pesquisar.value)
             const {response, json} = await request(url,options)
             if(response){
                 setCharacters(prevCharacters => [...prevCharacters,...json.results])
@@ -55,13 +65,13 @@ const Characters = () => {
         }
     } 
 
-    useEffect(()=>{
+    useEffect(()=>{  
         if(lastPage === 0) {
             getAllCharacters()
             setLastPage(currentPage)
             setCurrentPage(prevPage => prevPage + 1);
         }
-
+        
         let wait = false
         let previousScrollPosition = window.scrollY || document.documentElement.scrollTop;
         function infiniteScroll() {
@@ -92,10 +102,15 @@ const Characters = () => {
        
     },[lastPage, currentPage, info])
 
-
-
     return (
         <section className={`animeLeft`}>
+
+            <h1 className="title">Personagens</h1>
+            <form action="" className={styles.form_pesquisar} onSubmit={handleSubmit}>
+                <Input type="text" name="pesquisar" {...pesquisar}/>
+                <Button>Pesquisar</Button>
+            </form>
+
             <div className={`${styles.characters}`}>
                 <Head title="RMR - Personagens" description="Listagem dos personagens da série Rick and Morty"/>
                 <div className={styles.cards}>

@@ -21,7 +21,7 @@
   }
 
   .button:disabled{
-    background: linear-gradient(-120deg, #5eccff , #81D4FA, #d0effd );
+    background: linear-gradient(-120deg, #5eccff , #62bfeb, #abdef5 );
     opacity: 0.5;
     cursor: wait;
   }

@@ -11,5 +11,6 @@ declare const styles: {
     readonly card_info: string
     readonly temporary_text: string,
     readonly button_anim_bg_gradient: string,
+    readonly form_pesquisar: string
 };
 export default styles;

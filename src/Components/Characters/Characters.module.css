@@ -5,6 +5,18 @@
   align-items: center;
 }
 
+.form_pesquisar{
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  align-items: center;
+  gap: 20px;
+  justify-content: ce;
+}
+
+.form_pesquisar > div{
+  margin: 0;
+}
+
 .characters .cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

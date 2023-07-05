@@ -1,8 +1,9 @@
 export const API_URL = 'https://rickandmortyapi.com/api';
 
-export const GET_ALL_CHARACTERS = (page: number) => {
+export const GET_ALL_CHARACTERS = (page: number, name: string) => {
+    
 
-    const params = new URLSearchParams({ page: page.toString() }).toString();
+    const params = new URLSearchParams({ page: page.toString(), name}).toString();
     const url = `${API_URL}/character/?${params}`;
     
     return {
