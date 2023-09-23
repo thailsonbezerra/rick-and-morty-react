@@ -1,0 +1,18 @@
+.character_container {
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.character_content h1 {
+  margin-bottom: 12px;
+}
+
+.character_content ul li {
+  margin-bottom: 4px;
+}
+
+.character_content ul button {
+  margin-top: 12px;
+}
