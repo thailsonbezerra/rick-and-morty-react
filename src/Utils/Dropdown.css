@@ -1,0 +1,24 @@
+.dropdown {
+  position: relative;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdown-button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  margin-bottom: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
