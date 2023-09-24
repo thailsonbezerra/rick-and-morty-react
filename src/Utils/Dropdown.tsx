@@ -13,6 +13,8 @@ const Dropdown: React.FC<DropdownProps> = ({ children, items }) => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
     setScrollStyle(isOpen ? "" : "scroll");
+    const button = document.querySelector(`.dropdown-button`);
+    button?.classList.toggle("is-open");
   };
 
   return (

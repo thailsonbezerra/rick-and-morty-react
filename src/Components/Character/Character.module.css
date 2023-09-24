@@ -3,6 +3,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+  align-items: center;
+  justify-items: center;
 }
 
 .character_content h1 {
@@ -15,4 +17,9 @@
 
 .character_content ul button {
   margin-top: 12px;
+}
+
+.btn_eps {
+  width: 100%;
+  margin-top: 8px;
 }

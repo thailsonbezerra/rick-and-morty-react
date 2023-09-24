@@ -5,6 +5,7 @@ import { GET_CHARACTER, GET_LOCATION } from "../../api";
 import Image from "../../Helper/Image";
 import styles from "./Character.module.css";
 import Dropdown from "../../Utils/Dropdown";
+import Button from "../Forms/Button/Button";
 
 interface LocationAndOrigin {
   name: string;
@@ -109,10 +110,13 @@ const Character = () => {
           <li>Origem: {character.origin.name}</li>
           <li>Especie: {character.species}</li>
           <li>Estado: {character.status}</li>
-          <Dropdown items={location ? location : []}>Ver Localização</Dropdown>
+          <Dropdown items={location ? location : []}>Ver localização</Dropdown>
         </ul>
       </div>
-      <img src={character.image} alt={character.name} />
+      <div>
+        <img src={character.image} alt={character.name} />
+        <Button className={styles.btn_eps}>Lista de Episodios</Button>
+      </div>
     </section>
   );
 };
