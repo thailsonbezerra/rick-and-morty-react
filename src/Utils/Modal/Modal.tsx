@@ -34,16 +34,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
 
   return (
     <div className="modal" style={{ display: modalDisplay }}>
-      <div className="modal-content">
+      <div className="modal-content" ref={modalRef}>
         <div className="modal-header">
           <h2>{title}</h2>
           <span className="close" onClick={onClose}>
             &times;
           </span>
         </div>
-        <div className="modal-body" ref={modalRef}>
-          {children}
-        </div>
+        <div className="modal-body">{children}</div>
       </div>
     </div>
   );
