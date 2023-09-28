@@ -32,3 +32,14 @@ export const GET_LOCATION = (url: string) => {
     },
   };
 };
+
+export const GET_ALL_EPISODES = (ids: string[]) => {
+  const episodesIds = ids.join(", ");
+
+  return {
+    url: `${API_URL}/episode/${episodesIds}`,
+    options: {
+      method: "GET",
+    },
+  };
+};

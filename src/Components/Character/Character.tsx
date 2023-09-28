@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Head from "../Head";
-import { GET_CHARACTER, GET_LOCATION } from "../../api";
+import { GET_ALL_EPISODES, GET_CHARACTER, GET_LOCATION } from "../../api";
 import Image from "../../Helper/Image";
 import styles from "./Character.module.css";
 import Dropdown from "../../Utils/Dropdown/Dropdown";
@@ -37,9 +37,20 @@ interface Location {
   error?: string;
 }
 
+interface Episode {
+  id: number;
+  name: string;
+  air_date: string;
+  episode: string;
+  characters: string[];
+  url: string;
+  created: string;
+}
+
 const Character = () => {
   const [character, setCharacter] = useState<Character | null>(null);
   const [location, setLocation] = useState<string[] | null>(null);
+  const [episodes, setEpisodes] = useState<Episode[] | null>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -48,7 +59,6 @@ const Character = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
-    console.log("entrou aq");
     setIsModalOpen(true);
   };
 
@@ -92,6 +102,20 @@ const Character = () => {
     }
   };
 
+  const getAllEpisodes = async (url: string, options: RequestInit) => {
+    try {
+      const response = await fetch(url, options);
+      const data: Episode[] = await response.json();
+
+      if (!data.length) setError(`Um error ocorreu: Episode not found`);
+      else setEpisodes(data);
+
+      setLoading(false);
+    } catch (error) {
+      setError(`Um erro ocorreu: ${error}`);
+    }
+  };
+
   useEffect(() => {
     setLoading(true);
 
@@ -103,6 +127,17 @@ const Character = () => {
     if (character && character.location && character.location.url !== null) {
       const { url, options } = GET_LOCATION(character.location.url);
       getLocation(url, options);
+    }
+
+    if (character && character.episode) {
+      const ids = character.episode.map((episode) => {
+        return episode.replace("https://rickandmortyapi.com/api/episode/", "");
+      });
+
+      if (ids) {
+        const { url, options } = GET_ALL_EPISODES(ids);
+        getAllEpisodes(url, options);
+      }
     }
   }, [character]);
 
@@ -128,11 +163,21 @@ const Character = () => {
       <div>
         <img src={character.image} alt={character.name} />
         <Button onClick={openModal} className={styles.btn_eps}>
-          Lista de Episodios
+          Lista de Episódios
         </Button>
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <h2>Lista de episodios</h2>
-          <p>Modal para a lista de episodios.</p>
+          <h2>Lista de episódios</h2>
+
+          {episodes !== null}
+
+          <ul>
+            {episodes !== null &&
+              episodes.map((episode) => (
+                <li
+                  key={episode.id}
+                >{`${episode.episode} - ${episode.name}`}</li>
+              ))}
+          </ul>
         </Modal>
       </div>
     </section>
