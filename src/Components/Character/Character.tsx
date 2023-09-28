@@ -45,6 +45,7 @@ interface Episode {
   characters: string[];
   url: string;
   created: string;
+  error?: string;
 }
 
 const Character = () => {
@@ -105,10 +106,11 @@ const Character = () => {
   const getAllEpisodes = async (url: string, options: RequestInit) => {
     try {
       const response = await fetch(url, options);
-      const data: Episode[] = await response.json();
+      const data: Episode[] | Episode = await response.json();
 
-      if (!data.length) setError(`Um error ocorreu: Episode not found`);
-      else setEpisodes(data);
+      if (Array.isArray(data)) setEpisodes(data);
+      else if (data.error) setEpisodes([]);
+      else setEpisodes([data]);
 
       setLoading(false);
     } catch (error) {
