@@ -165,11 +165,11 @@ const Character = () => {
         <Button onClick={openModal} className={styles.btn_eps}>
           Lista de Episódios
         </Button>
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <h2>Lista de episódios</h2>
-
-          {episodes !== null}
-
+        <Modal
+          title={"Lista de episódios"}
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        >
           <ul>
             {episodes !== null &&
               episodes.map((episode) => (

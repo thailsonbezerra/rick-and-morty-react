@@ -5,15 +5,16 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  title: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
   const [modalDisplay, setModalDisplay] = useState<string>("none");
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen) {
-      setModalDisplay("block");
+      setModalDisplay("flex");
       document.addEventListener("mousedown", handleOutsideClick);
     } else {
       setModalDisplay("none");
@@ -33,11 +34,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="modal" style={{ display: modalDisplay }}>
-      <div className="modal-content" ref={modalRef}>
-        <span className="close" onClick={onClose}>
-          &times;
-        </span>
-        {children}
+      <div className="modal-content">
+        <div className="modal-header">
+          <h2>{title}</h2>
+          <span className="close" onClick={onClose}>
+            &times;
+          </span>
+        </div>
+        <div className="modal-body" ref={modalRef}>
+          {children}
+        </div>
       </div>
     </div>
   );
