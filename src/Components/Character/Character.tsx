@@ -4,8 +4,9 @@ import Head from "../Head";
 import { GET_CHARACTER, GET_LOCATION } from "../../api";
 import Image from "../../Helper/Image";
 import styles from "./Character.module.css";
-import Dropdown from "../../Utils/Dropdown";
+import Dropdown from "../../Utils/Dropdown/Dropdown";
 import Button from "../Forms/Button/Button";
+import Modal from "../../Utils/Modal/Modal";
 
 interface LocationAndOrigin {
   name: string;
@@ -43,6 +44,17 @@ const Character = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { id } = useParams();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    console.log("entrou aq");
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const getCharacter = async (url: string, options: RequestInit) => {
     try {
@@ -115,7 +127,13 @@ const Character = () => {
       </div>
       <div>
         <img src={character.image} alt={character.name} />
-        <Button className={styles.btn_eps}>Lista de Episodios</Button>
+        <Button onClick={openModal} className={styles.btn_eps}>
+          Lista de Episodios
+        </Button>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <h2>Lista de episodios</h2>
+          <p>Modal para a lista de episodios.</p>
+        </Modal>
       </div>
     </section>
   );
