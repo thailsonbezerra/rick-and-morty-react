@@ -5,6 +5,7 @@ import Footer from "./Components/Footer/Footer"
 import Characters from "./Components/Characters/Characters"
 import About from "./Components/About/About"
 import Character from "./Components/Character/Character"
+import TypeIt from "./Components/TypeIt/TypeIt"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Characters/>}></Route>
           <Route path="sobre" element={<About/>}></Route>
           <Route path="character/:id" element={<Character/>}></Route>
+          <Route path="digite" element={<TypeIt/>}></Route>
         </Routes>
         </div>
         <Footer/>
