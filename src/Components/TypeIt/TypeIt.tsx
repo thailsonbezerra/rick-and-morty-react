@@ -30,7 +30,10 @@ const TypeIt = () => {
     const { loading, error, request } = useFetch();
     const [info, setInfo] = React.useState<Info | null>(null);
     const [character, setCharacter] = React.useState<Character | null>(null);
-    const [change, setChange] = React.useState<boolean>(true);
+    const [change, setChange] = React.useState<boolean>(false);
+    
+    const [charName, setCharName] = React.useState<string[] | null>(null);
+    const charNameInput: string[] = []
 
     const changeCharacter = () => {
         setChange(true)
@@ -42,6 +45,7 @@ const TypeIt = () => {
             const { response, json } = await request(url, options);
             if (response) {
                 setInfo(json.info);
+                setChange(true)
             }
         } catch (error) {
             console.log(error);
@@ -61,17 +65,45 @@ const TypeIt = () => {
         }
     }
 
-
     React.useEffect(() => {
         getAllCharacters();
     }, [])
-
+    
     React.useEffect(() => {
         if(change && info) {
             const id = Math.floor(Math.random() * (info.count - 1 + 1)) + 1
             getCharacter(id.toString());
         }
-    }, [change])
+
+        if (!change && character) {
+            setCharName(character?.name.split(''))
+        }
+    }, [change, character])
+
+    React.useEffect(() => {
+        const handleKeyDown = (event: any) => {
+
+            if(charName && charNameInput.length !== charName.length &&(charName[charNameInput.length].toLowerCase() === event.key.toLowerCase())){
+                charNameInput.push(event.key.toLowerCase())
+
+                if(charNameInput.length === charName.length){
+                    setCharName(null)
+                    changeCharacter()                    
+                }
+            }
+        
+        };
+    
+        window.addEventListener('keydown', handleKeyDown);
+    
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [charName]);
+    
+    React.useEffect(() => {
+        
+    }, [character]);
 
     if (loading) return <p>{'Carregando...'}</p>
     if (error) return <p>{'Erro'}</p>
