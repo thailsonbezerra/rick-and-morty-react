@@ -1,8 +1,8 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
 .App {
   display: flex;
@@ -10,78 +10,107 @@
   min-height: calc(100vh + 10rem);
 }
 
-.content{
+.App.skew-shake-y {
+  animation: skew-y-shake 1.3s;
+  filter: blur(4px);
+  opacity: 0.9;
+  text-shadow: 0px -5px #ec2225, 0px 5px #00c2cb, -5px 0px #ec2225,
+    5px 0px #00c2cb;
+}
+
+@keyframes skew-y-shake {
+  0% {
+    transform: skewY(-15deg);
+  }
+  5% {
+    transform: skewY(15deg);
+  }
+  10% {
+    transform: skewY(-15deg);
+  }
+  15% {
+    transform: skewY(15deg);
+  }
+  20% {
+    transform: skewY(0deg);
+  }
+  100% {
+    transform: skewY(0deg);
+  }
+}
+
+.content {
   flex: 1;
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 0;
 }
-  
-  body {
-    font-family: "Montserrat", sans-serif;
-  }
 
-  .title {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    line-height: 1;
-    font-size: 3rem;
-    margin: 1rem 0;
-    position: relative;
-    z-index: 1;
-  }
+body {
+  font-family: "Montserrat", sans-serif;
+}
 
-  .title::after{
-    content: '';
-    display: block;
-    width: 1.5rem;
-    height: 1.5rem;
-    background: #5eccff;
-    position: absolute;
-    bottom: 5px;
-    left: -5px;
-    border-radius: 0.2rem;
-    z-index: -1;
-  }
-  
-  img {
-    max-width: 100%;
-    display: block;
-    height: auto;
-  }
-  
-  ul {
-    list-style: none;
-  }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+.title {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1;
+  font-size: 3rem;
+  margin: 1rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.title::after {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #5eccff;
+  position: absolute;
+  bottom: 5px;
+  left: -5px;
+  border-radius: 0.2rem;
+  z-index: -1;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
 .animeLeft {
-    transform: translateX(-20px);
-    opacity: 0;
-    animation: animeLeft .3s forwards;
+  transform: translateX(-20px);
+  opacity: 0;
+  animation: animeLeft 0.3s forwards;
 }
 
 @keyframes animeLeft {
-    to {
-        transform: initial;
-        opacity: initial;
-    }
+  to {
+    transform: initial;
+    opacity: initial;
+  }
 }
 
 .loading {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 10px solid #ccc;
-    border-right-color: transparent;
-    animation: loading 1s infinite;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 10px solid #ccc;
+  border-right-color: transparent;
+  animation: loading 1s infinite;
 }
 
 @keyframes loading {
-    to{
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
