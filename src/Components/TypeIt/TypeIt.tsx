@@ -31,11 +31,16 @@ const TypeIt = () => {
   const [character, setCharacter] = React.useState<Character | null>(null);
   const [change, setChange] = React.useState<boolean>(false);
 
+  const inputs: string[] = [];
   const [charName, setCharName] = React.useState<string[] | null>(null);
-  const charNameInput: string[] = [];
+  const [charNameInput, setCharNameInput] = React.useState<string[]>([]);
+  const [charNameRest, setCharNameRest] = React.useState<string[]>([]);
 
   const changeCharacter = () => {
     setChange(true);
+    setCharName(null);
+    setCharNameInput([]);
+    setCharNameRest([]);
   };
 
   const getAllCharacters = async () => {
@@ -82,15 +87,20 @@ const TypeIt = () => {
   React.useEffect(() => {
     const handleKeyDown = (event: any) => {
       event.preventDefault();
+
       if (
         charName &&
-        charNameInput.length !== charName.length &&
-        charName[charNameInput.length].toLowerCase() === event.key.toLowerCase()
+        inputs.length !== charName.length &&
+        charName[inputs.length].toLowerCase() === event.key.toLowerCase()
       ) {
-        charNameInput.push(event.key.toLowerCase());
+        inputs.push(event.key.toLowerCase());
+        setCharNameInput([...inputs]);
+        setCharNameRest(charName.slice(inputs.length));
 
-        if (charNameInput.length === charName.length) {
+        if (inputs.length === charName.length) {
           setCharName(null);
+          setCharNameInput([]);
+          setCharNameRest([]);
           changeCharacter();
         }
       } else {
@@ -109,13 +119,15 @@ const TypeIt = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [charName]);
+  }, [charName, charNameInput, charNameRest]);
 
   if (loading) return <p>{"Carregando..."}</p>;
   if (error) return <p>{"Erro"}</p>;
   return (
     <section>
       <p>{character?.name}</p>
+      <p>{charNameInput}</p>
+      <p>{charNameRest}</p>
       <Button onClick={changeCharacter}>Alterar Personagem</Button>
     </section>
   );
