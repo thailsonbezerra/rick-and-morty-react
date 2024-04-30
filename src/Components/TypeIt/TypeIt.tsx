@@ -119,7 +119,7 @@ const TypeIt = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [charName, charNameInput, charNameRest]);
+  }, [charName]);
 
   if (loading) return <p>{"Carregando..."}</p>;
   if (error) return <p>{"Erro"}</p>;
