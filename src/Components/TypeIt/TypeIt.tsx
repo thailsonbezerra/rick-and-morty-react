@@ -2,6 +2,7 @@ import React from "react";
 import { GET_ALL_CHARACTERS, GET_CHARACTER } from "../../api";
 import useFetch from "../../Hooks/useFetch";
 import Button from "../Forms/Button/Button";
+import styles from "./TypeIt.module.css";
 
 interface Info {
   count: number;
@@ -85,6 +86,10 @@ const TypeIt = () => {
   }, [change, character]);
 
   React.useEffect(() => {
+    if (charNameRest.length === 0 && charName) {
+      setCharNameRest(charName);
+    }
+
     const handleKeyDown = (event: any) => {
       event.preventDefault();
 
@@ -124,10 +129,11 @@ const TypeIt = () => {
   if (loading) return <p>{"Carregando..."}</p>;
   if (error) return <p>{"Erro"}</p>;
   return (
-    <section>
-      <p>{character?.name}</p>
-      <p>{charNameInput}</p>
-      <p>{charNameRest}</p>
+    <section className={styles.typeit_container}>
+      <p className={styles.character_name}>
+        <span className={styles.input}>{charNameInput}</span>
+        <span className={styles.rest}>{charNameRest}</span>
+      </p>
       <Button onClick={changeCharacter}>Alterar Personagem</Button>
     </section>
   );

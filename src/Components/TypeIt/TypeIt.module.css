@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "Rocher Cinza";
+  src: url("../../fonts/rocher_cinza.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Rocher Azul";
+  src: url("../../fonts/rocher_azul.woff2") format("woff2");
+}
+
+.typeit_container {
+  height: 60vh;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rest {
+  font-family: "Rocher Cinza";
+}
+
+.input {
+  font-family: "Rocher Azul";
+}
+
+.character_name {
+  text-align: center;
+  font-size: 64px;
+}
