@@ -92,13 +92,16 @@ const TypeIt = () => {
 
     const handleKeyDown = (event: any) => {
       event.preventDefault();
+      if (!charName) return;
+      const allowedCharacters =
+        "abcçdefghijklmnopqrstuvwxyzABCÇDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.:- ";
 
       if (
         charName &&
         inputs.length !== charName.length &&
         charName[inputs.length].toLowerCase() === event.key.toLowerCase()
       ) {
-        inputs.push(event.key.toLowerCase());
+        inputs.push(charName[inputs.length]);
         setCharNameInput([...inputs]);
         setCharNameRest(charName.slice(inputs.length));
 
@@ -110,7 +113,7 @@ const TypeIt = () => {
         }
       } else {
         const app = document.querySelector(".App");
-        if (app) {
+        if (app && allowedCharacters.includes(event.key)) {
           app.classList.add("skew-shake-y");
           setTimeout(() => {
             app.classList.remove("skew-shake-y");
