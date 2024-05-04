@@ -33,6 +33,7 @@ const TypeIt = () => {
   const [change, setChange] = React.useState<boolean>(false);
 
   const inputs: string[] = [];
+  const [input, setInput] = React.useState<string>("");
   const [charName, setCharName] = React.useState<string[] | null>(null);
   const [charNameInput, setCharNameInput] = React.useState<string[]>([]);
   const [charNameRest, setCharNameRest] = React.useState<string[]>([]);
@@ -92,9 +93,16 @@ const TypeIt = () => {
 
     const handleKeyDown = (event: any) => {
       event.preventDefault();
-      if (!charName) return;
+
       const allowedCharacters =
         "abcçdefghijklmnopqrstuvwxyzABCÇDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.:- ";
+
+      if (allowedCharacters.includes(event.key)) {
+        setInput(event.key);
+        setTimeout(() => {
+          setInput("");
+        }, 200);
+      }
 
       if (
         charName &&
@@ -129,15 +137,19 @@ const TypeIt = () => {
     };
   }, [charName]);
 
-  if (loading) return <p>{"Carregando..."}</p>;
+  if (loading)
+    return <p className={styles.loading_typeit}>{"Carregando..."}</p>;
   if (error) return <p>{"Erro"}</p>;
   return (
     <section className={styles.typeit_container}>
-      <p className={styles.character_name}>
-        <span className={styles.input}>{charNameInput}</span>
-        <span className={styles.rest}>{charNameRest}</span>
-      </p>
-      <Button onClick={changeCharacter}>Alterar Personagem</Button>
+      <h1 className={styles.typed}>{input}</h1>
+      <div>
+        <p className={styles.character_name}>
+          <span className={styles.input}>{charNameInput}</span>
+          <span className={styles.rest}>{charNameRest}</span>
+        </p>
+        <Button onClick={changeCharacter}>Alterar Personagem</Button>
+      </div>
     </section>
   );
 };

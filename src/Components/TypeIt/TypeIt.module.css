@@ -7,6 +7,21 @@
   src: url("../../fonts/rocher_azul.woff2") format("woff2");
 }
 
+.loading_typeit {
+  position: absolute;
+  font-size: 64px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Rocher Cinza";
+}
+
+.typed {
+  position: absolute;
+  opacity: 0.2;
+  font-size: 32rem;
+}
+
 .typeit_container {
   height: 60vh;
   gap: 8px;
@@ -22,6 +37,15 @@
 
 .input {
   font-family: "Rocher Azul";
+}
+
+.typeit_container > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
 }
 
 .character_name {
