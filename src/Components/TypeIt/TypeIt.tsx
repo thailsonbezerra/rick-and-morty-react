@@ -43,6 +43,7 @@ const TypeIt = () => {
     setCharName(null);
     setCharNameInput([]);
     setCharNameRest([]);
+    setInput("");
   };
 
   const getAllCharacters = async () => {
@@ -95,7 +96,7 @@ const TypeIt = () => {
       event.preventDefault();
 
       const allowedCharacters =
-        "abcçdefghijklmnopqrstuvwxyzABCÇDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.:- ";
+        " abcçdefghijklmnopqrstuvwxyzABCÇDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.:-?!()[]{}<>+=@#$%&*;\"'\\|/`^~_<>";
 
       if (allowedCharacters.includes(event.key)) {
         setInput(event.key);
