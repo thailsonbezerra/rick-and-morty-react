@@ -6,6 +6,7 @@ import Characters from "./Components/Characters/Characters"
 import About from "./Components/About/About"
 import Character from "./Components/Character/Character"
 import TypeIt from "./Components/TypeIt/TypeIt"
+import Dashboard from "./Components/Dashboard/Dashboard"
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="sobre" element={<About/>}></Route>
           <Route path="character/:id" element={<Character/>}></Route>
           <Route path="digite" element={<TypeIt/>}></Route>
+          <Route path="dashboard" element={<Dashboard/>}></Route>
         </Routes>
         </div>
         <Footer/>

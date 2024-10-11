@@ -3,6 +3,7 @@ import { GET_ALL_CHARACTERS, GET_CHARACTER } from "../../api";
 import useFetch from "../../Hooks/useFetch";
 import Button from "../Forms/Button/Button";
 import styles from "./TypeIt.module.css";
+import Head from "../Head";
 
 interface Info {
   count: number;
@@ -145,6 +146,10 @@ const TypeIt = () => {
     <section className={styles.typeit_container}>
       <h1 className={styles.typed}>{input}</h1>
       <div>
+      <Head
+          title="RMR - Digite"
+          description="Digite nome dos personagens da série Rick and Morty"
+        />
         <p className={styles.character_name}>
           <span className={styles.input}>{charNameInput}</span>
           <span className={styles.rest}>{charNameRest}</span>
