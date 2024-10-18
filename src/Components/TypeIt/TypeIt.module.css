@@ -52,3 +52,33 @@
   text-align: center;
   font-size: 64px;
 }
+
+.score {
+  position: absolute;
+  width: 100%;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-size: 32px;
+  color: lightslategray;
+}
+
+.score .score_input_success {
+  color: lightgreen;
+  font-size: 64px;
+}
+
+.score .score_input_fail {
+  color: lightcoral;
+}
+
+.score_sequence_success {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: black;
+  padding: 24px;
+  font-weight: bold;
+  font-size: 48px;
+}
