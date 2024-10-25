@@ -4,6 +4,7 @@ import useFetch from "../../Hooks/useFetch";
 import Button from "../Forms/Button/Button";
 import styles from "./TypeIt.module.css";
 import Head from "../Head";
+import { formatTime } from "../../Utils/formartTime";
 
 interface Info {
   count: number;
@@ -38,6 +39,8 @@ const TypeIt = () => {
   const [charName, setCharName] = React.useState<string[] | null>(null);
   const [charNameInput, setCharNameInput] = React.useState<string[]>([]);
   const [charNameRest, setCharNameRest] = React.useState<string[]>([]);
+
+  const [time, setTime] = React.useState(120);
 
   const [inputQuantity, setInputQuantity] = React.useState<number>(0);
   const [inputCorrectQuantity, setInputCorrectQuantity] =
@@ -168,8 +171,17 @@ const TypeIt = () => {
     };
   }, [charName]);
 
-  if (loading)
-    return <p className={styles.loading_typeit}>{"Carregando..."}</p>;
+
+  React.useEffect(() => {
+    if (time <= 0) return;
+
+    const interval = setInterval(() => {
+      setTime((prevTime: number) => prevTime - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [time]);
+
   if (error) return <p>{"Erro"}</p>;
   return (
     <>
@@ -190,11 +202,19 @@ const TypeIt = () => {
         <h1 className={styles.typed}>{input}</h1>
         <div>
           <p className={styles.character_name}>
-            <span className={styles.input}>{charNameInput}</span>
-            <span className={styles.rest}>{charNameRest}</span>
+            {loading && <p className={styles.rest}>{"Carregando..."}</p>}
+            {!loading && 
+              <>
+                <span className={styles.input}>{charNameInput}</span>
+                <span className={styles.rest}>{charNameRest}</span>
+              </>
+            }
           </p>
           <Button onClick={changeCharacter}>Alterar Personagem</Button>
-          <p>2:13</p>
+          <div>
+            <h1>{formatTime(time)}</h1>
+            {time <= 0 && <p>Tempo esgotado!</p>}
+          </div>
         </div>
       </section>
       {isSequenceVisible && (

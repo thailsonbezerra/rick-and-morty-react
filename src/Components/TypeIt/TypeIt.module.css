@@ -7,15 +7,6 @@
   src: url("../../fonts/rocher_azul.woff2") format("woff2");
 }
 
-.loading_typeit {
-  position: absolute;
-  font-size: 64px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: "Rocher Cinza";
-}
-
 .typed {
   position: absolute;
   opacity: 0.2;
@@ -55,10 +46,9 @@
 
 .score {
   position: absolute;
-  width: 100%;
   right: 0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 0 24px;
   font-size: 32px;
   color: lightslategray;
@@ -66,7 +56,6 @@
 
 .score .score_input_success {
   color: lightgreen;
-  font-size: 64px;
 }
 
 .score .score_input_fail {
