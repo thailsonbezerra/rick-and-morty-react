@@ -5,6 +5,7 @@ import Button from "../Forms/Button/Button";
 import styles from "./TypeIt.module.css";
 import Head from "../Head";
 import { formatTime } from "../../Utils/formartTime";
+import Modal from "../../Utils/Modal/Modal";
 
 interface Info {
   count: number;
@@ -40,21 +41,40 @@ const TypeIt = () => {
   const [charNameInput, setCharNameInput] = React.useState<string[]>([]);
   const [charNameRest, setCharNameRest] = React.useState<string[]>([]);
 
-  const [time, setTime] = React.useState(120);
+  const [time, setTime] = React.useState(0);
 
   const [inputQuantity, setInputQuantity] = React.useState<number>(0);
   const [inputCorrectQuantity, setInputCorrectQuantity] =
     React.useState<number>(0);
-  const [skippedCharQuantity, setskippedCharQuantity] =
+  const [skippedCharQuantity, setSkippedCharQuantity] =
     React.useState<number>(0);
   const [sequenceQuantityCorrect, setSequenceQuantityCorrect] =
     React.useState<number>(0);
   const [isSequenceVisible, setIsSequenceVisible] = React.useState(false);
 
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    changeCharacter();
+    setIsModalOpen(false);
+  };
+
+  const clearScore = () => {
+    setInputQuantity(0);
+    setInputCorrectQuantity(0);
+    setSkippedCharQuantity(0);
+    setSequenceQuantityCorrect(0);
+    setIsSequenceVisible(false);
+  };
+
   const changeCharacter = (
     event: React.MouseEvent<HTMLButtonElement> | null = null
   ) => {
-    event && setskippedCharQuantity((prev) => prev + 1);
+    event && setSkippedCharQuantity((prev) => prev + 1);
 
     setChange(true);
     setCharName(null);
@@ -76,9 +96,11 @@ const TypeIt = () => {
     }
   };
 
-  const getCharacter = async (id: string) => {
+  const getCharacter = async () => {
+    if (!info) return;
+    const id = Math.floor(Math.random() * (info.count - 1 + 1)) + 1;
     try {
-      const { url, options } = await GET_CHARACTER(id);
+      const { url, options } = await GET_CHARACTER(id.toString());
       const { response, json } = await request(url, options);
       if (response) {
         setCharacter(json);
@@ -90,13 +112,13 @@ const TypeIt = () => {
   };
 
   React.useEffect(() => {
+    openModal();
     getAllCharacters();
   }, []);
 
   React.useEffect(() => {
     if (change && info) {
-      const id = Math.floor(Math.random() * (info.count - 1 + 1)) + 1;
-      getCharacter(id.toString());
+      getCharacter();
     }
 
     if (!change && character) {
@@ -171,9 +193,12 @@ const TypeIt = () => {
     };
   }, [charName]);
 
-
   React.useEffect(() => {
-    if (time <= 0) return;
+    if (time <= 0) {
+      openModal();
+      clearScore();
+      return;
+    }
 
     const interval = setInterval(() => {
       setTime((prevTime: number) => prevTime - 1);
@@ -182,7 +207,42 @@ const TypeIt = () => {
     return () => clearInterval(interval);
   }, [time]);
 
-  if (error) return <p>{"Erro"}</p>;
+  if (error) return;
+  if (isModalOpen)
+    return (
+      <Modal
+        title={"Escolha o tempo!"}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      >
+        <div className={styles.choose_time}>
+          <Button
+            onClick={() => {
+              setTime(30);
+              closeModal();
+            }}
+          >
+            30 segundos
+          </Button>
+          <Button
+            onClick={() => {
+              setTime(60);
+              closeModal();
+            }}
+          >
+            1 minutos
+          </Button>
+          <Button
+            onClick={() => {
+              setTime(60 * 3);
+              closeModal();
+            }}
+          >
+            3 minutos
+          </Button>
+        </div>
+      </Modal>
+    );
   return (
     <>
       <Head
@@ -203,17 +263,16 @@ const TypeIt = () => {
         <div>
           <p className={styles.character_name}>
             {loading && <p className={styles.rest}>{"Carregando..."}</p>}
-            {!loading && 
+            {!loading && (
               <>
                 <span className={styles.input}>{charNameInput}</span>
                 <span className={styles.rest}>{charNameRest}</span>
               </>
-            }
+            )}
           </p>
           <Button onClick={changeCharacter}>Alterar Personagem</Button>
           <div>
             <h1>{formatTime(time)}</h1>
-            {time <= 0 && <p>Tempo esgotado!</p>}
           </div>
         </div>
       </section>

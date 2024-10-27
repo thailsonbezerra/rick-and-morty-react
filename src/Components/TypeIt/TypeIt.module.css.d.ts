@@ -11,6 +11,7 @@ declare const styles: {
   readonly score_sequence_success: string;
   readonly score_input_success: string;
   readonly score_input_fail: string;
+  readonly choose_time: string;
 };
 
 export default styles;

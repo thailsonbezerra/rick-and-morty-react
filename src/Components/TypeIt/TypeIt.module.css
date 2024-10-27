@@ -52,6 +52,7 @@
   padding: 0 24px;
   font-size: 32px;
   color: lightslategray;
+  border-left: 3px solid black;
 }
 
 .score .score_input_success {
@@ -70,4 +71,12 @@
   padding: 24px;
   font-weight: bold;
   font-size: 48px;
+}
+
+.choose_time {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
