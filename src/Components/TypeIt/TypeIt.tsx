@@ -211,9 +211,9 @@ const TypeIt = () => {
   if (isModalOpen)
     return (
       <Modal
-        title={"Escolha o tempo!"}
-        isOpen={isModalOpen}
-        onClose={closeModal}
+      title={"Escolha o tempo"}
+      isOpen={isModalOpen}
+      onClose={closeModal}
       >
         <div className={styles.choose_time}>
           <Button
@@ -250,13 +250,13 @@ const TypeIt = () => {
         description="Digite nome dos personagens da série Rick and Morty"
       />
       <section className={styles.score}>
-        <span>{inputQuantity}</span>
-        <span className={styles.score_input_success}>
-          {inputCorrectQuantity}
-        </span>
-        <span className={styles.score_input_fail}>
-          {inputQuantity - inputCorrectQuantity}
-        </span>
+      <span>{inputQuantity}</span>
+      <span className={styles.score_input_success}>
+        {inputCorrectQuantity}
+      </span>
+      <span className={styles.score_input_fail}>
+        {inputQuantity - inputCorrectQuantity}
+      </span>
       </section>
       <section className={styles.typeit_container}>
         <h1 className={styles.typed}>{input}</h1>
@@ -271,9 +271,12 @@ const TypeIt = () => {
             )}
           </p>
           <Button onClick={changeCharacter}>Alterar Personagem</Button>
-          <div>
-            <h1>{formatTime(time)}</h1>
-          </div>
+          {time > 0 && (
+            <div>
+              <h1>{formatTime(time)}</h1>
+            </div>
+          )}
+          
         </div>
       </section>
       {isSequenceVisible && (

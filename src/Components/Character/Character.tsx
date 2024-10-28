@@ -147,7 +147,8 @@ const Character = () => {
   if (error) return <p>{error}</p>;
   if (character === null) return null;
   return (
-    <section className={`animeLeft ${styles.character_container}`}>
+    <>
+      <section className={`animeLeft ${styles.character_container}`}>
       <Head
         title={`RMR - ${character.name}`}
         description={`Personagem ${character.name} da série Rick and Morty.`}
@@ -167,7 +168,9 @@ const Character = () => {
         <Button onClick={openModal} className={styles.btn_eps}>
           Lista de Episódios
         </Button>
-        <Modal
+      </div>
+      </section>
+      <Modal
           title={"Lista de episódios"}
           isOpen={isModalOpen}
           onClose={closeModal}
@@ -180,9 +183,8 @@ const Character = () => {
                 >{`${episode.episode} - ${episode.name}`}</li>
               ))}
           </ul>
-        </Modal>
-      </div>
-    </section>
+      </Modal>
+    </>
   );
 };
 
